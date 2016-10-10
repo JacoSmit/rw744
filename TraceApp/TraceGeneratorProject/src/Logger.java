@@ -81,9 +81,9 @@ public class Logger {
      * @param task: The task used.
      * @param singleLock: Whether the single lock or double lock implementation was used.
      */
-    public void flush(long N, int Q, int P, int B, int workerType, int task, boolean singleLock) {
+    public void flush(long N, int Q, int P, int B, int workerType, int task, boolean singleLock, String filename) {
         try {
-            FileWriter fw = new FileWriter(new File("log.txt"));
+            FileWriter fw = new FileWriter(new File(filename));
 
             fw.append("------------------ CONFIGURATION --------------------\n");
             fw.append("Total number of Tasks: ");

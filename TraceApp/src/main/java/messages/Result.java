@@ -1,5 +1,6 @@
 package messages;
 
+
 /**
  * Created by jaco on 9/28/16.
  *
@@ -15,4 +16,5 @@ public class Result {
     public String getResult() {
         return this.result;
     }
+
 }

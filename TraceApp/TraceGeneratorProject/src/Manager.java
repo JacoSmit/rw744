@@ -64,6 +64,11 @@ public class Manager {
     private int P;
 
     /**
+     * The name of the file
+     */
+    private String filename;
+
+    /**
      * The constructor for the Manager of the workers and workpools.
      * @param N: The number of tasks in total to spawn. This is the total across all workpools. The
      *         load will be divided by the number of workpools automatically.
@@ -73,8 +78,9 @@ public class Manager {
      * @param workerType: The type of the worker.
      * @param task: The type of the task.
      * @param singleLock: If the workpool is to use single locking or double locking.
+     * @param filename: The name of the file to be logged to.
      */
-    public Manager(long N, int Q, int P, int B, int workerType, int task, boolean singleLock) {
+    public Manager(long N, int Q, int P, int B, int workerType, int task, boolean singleLock, String filename) {
         this.N = N;
         this.Q = Q;
         this.P = P;
@@ -84,6 +90,7 @@ public class Manager {
         this.workerType = workerType;
         this.task = task;
         this.singleLock = singleLock;
+        this.filename = filename + ".log";
 
         divideWork(N, Q);
         assignWorkersRoundRobin(P);
@@ -188,7 +195,7 @@ public class Manager {
      */
     public void logBooks() {
         Manager.debug("Logging results");
-        Logger.getInstance().flush(this.N, this.Q, this.P, this.B, this.workerType, this.task, this.singleLock);
+        Logger.getInstance().flush(this.N, this.Q, this.P, this.B, this.workerType, this.task, this.singleLock, this.filename);
     }
 
     /**

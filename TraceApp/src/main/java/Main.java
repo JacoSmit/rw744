@@ -12,9 +12,12 @@ public class Main {
 
         ActorSystem system = ActorSystem.create("system");
 
-        final ActorRef topLevelActor = system.actorOf(Props.create(Master.class), "topLevelActor");
-        system.actorOf(Props.create(Terminator.class, topLevelActor), "terminator");
-        topLevelActor.tell(Master.Msg.START, ActorRef.noSender());
+        final ActorRef master = system.actorOf(Props.create(Master.class), "master");
+        system.actorOf(Props.create(Terminator.class, master), "terminator");
+
+        MasterUI ui = new MasterUI(master);
+
+        //master.tell(Master.Msg.START, ActorRef.noSender());
 
     }
 

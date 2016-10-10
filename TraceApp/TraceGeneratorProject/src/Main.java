@@ -30,7 +30,7 @@ public class Main {
         long start = System.currentTimeMillis();
 
         for (int i = 0; i < 1; i++) {
-            Manager manager = new Manager(N, Q, P, B, workerType, task, singleLock);
+            Manager manager = new Manager(N, Q, P, B, workerType, task, singleLock, args[7]);
             manager.enslaveWorkers();
             manager.endShift();
             manager.logBooks();
@@ -46,7 +46,7 @@ public class Main {
      * @return : Whether the arguments were fine.
      */
     private static boolean checkArgs(String args[]) {
-        if (args.length != 7) {
+        if (args.length != 8) {
             return false;
         }
 
@@ -66,6 +66,11 @@ public class Main {
             if (workerType > 2 || task > 4 || lock > 1) {
                 return false;
             }
+
+            if (args[7] == "") {
+                return false;
+            }
+
         } catch (NumberFormatException e){
             return false;
         }
@@ -74,14 +79,15 @@ public class Main {
     }
 
     private static void printUsage() {
-        System.out.println("Usage: java Main <N> <Q> <P> <B> <workerType> <task> <lock>\n" +
+        System.out.println("Usage: java Main <N> <Q> <P> <B> <workerType> <task> <lock> <filename>\n" +
                 "\tN: The number of tasks to execute\n" +
                 "\tQ: The number of work pools\n" +
                 "\tP: The  number of workers\n" +
                 "\tB: The number of tasks to spawn on average\n" +
                 "\tworkerType: 0 = Selfish, 1 = Friendly, 2 = Crazy\n" +
                 "\ttask: 0 = Fibonacci, 1 = Prime, 2 = Sleep, 3 = Loops, 4 = Mixed\n" +
-                "\tlock: 0 = single, 1 = double");
+                "\tlock: 0 = single, 1 = double" +
+                "\tfilename: name of the file to be logged to.");
         System.exit(1);
     }
 

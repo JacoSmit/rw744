@@ -7,6 +7,17 @@ import messages.Result;
  *
  */
 public class TaskExecutor extends UntypedActor{
+
+    private int id;
+
+    public TaskExecutor(int id) {
+        this.id = id;
+    }
+
+    private int getID() {
+        return this.id;
+    }
+
     public void onReceive(Object message) throws Throwable {
 
         if (message instanceof Job) {
